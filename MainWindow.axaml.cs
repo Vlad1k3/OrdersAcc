@@ -15,6 +15,13 @@ namespace OrdersAcc
             InitializeComponent();
         }
 
+        private void registrationButton_Click(object sender, RoutedEventArgs e){
+
+            Window newWindow = new registrationWindow();
+            newWindow.Show();
+            this.Close();
+        }
+
         public void switchWindowButton(object sender, RoutedEventArgs e)
         {
             string loginName = UsernameTextBox.Text;
@@ -38,7 +45,7 @@ namespace OrdersAcc
                         {
                             if (reader.Read())
                             {
-                                string loggedInUser = loginName; // Запоминаем имя пользователя
+                                string loggedInUser = loginName; 
                                 Window newWindow = new ordersWindow(loggedInUser);
                                 newWindow.Show();
                                 this.Close();

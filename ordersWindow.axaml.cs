@@ -118,13 +118,14 @@ namespace OrdersAcc
                                 string completionDate = reader.IsDBNull(reader.GetOrdinal("Completion_Date")) ? string.Empty : reader.GetDateTime("Completion_Date").ToString("yyyy-MM-dd");
                                 string userName = reader.IsDBNull(reader.GetOrdinal("FIO")) ? string.Empty : reader.GetString("FIO");
 
-                                // Дополнительное логгирование для проверки значений
+
                                 Console.WriteLine($"eqType: {eqType}, eqModel: {eqModel}, problemDesc: {problemDesc}, userName: {userName}, startDate: {startDate}, completionDate: {completionDate}");
 
                                 if (eqType != null && eqModel != null && problemDesc != null && userName != null && startDate != null && completionDate != null)
                                 {
                                     InfoWindow infoWindow = new InfoWindow(eqType, eqModel, problemDesc, userName, startDate, completionDate);
-                                    infoWindow.Show();
+                                    infoWindow.SizeToContent = SizeToContent.WidthAndHeight;
+                                    infoWindow.ShowDialog(this);
                                 }
                                 else
                                 {
@@ -143,10 +144,6 @@ namespace OrdersAcc
         
             
         }
-
-          
-        
-
 
         public void updateListButton_Click(object sender, RoutedEventArgs e)
         {

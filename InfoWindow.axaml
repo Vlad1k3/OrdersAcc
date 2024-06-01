@@ -9,13 +9,14 @@
         Height="500"
         CanResize="False">
     <Grid>
-        <StackPanel Margin="20">
+        <StackPanel Margin="20" x:Name="MainStackPanel">
             <TextBlock x:Name="EqTypeTextBlock" FontSize="16" />
             <TextBlock x:Name="EqModelTextBlock" FontSize="16" />
             <TextBlock x:Name="UserNameTextBlock" FontSize="16" />
             <TextBlock x:Name="StartDateTextBlock" FontSize="16" />
             <TextBlock x:Name="CompletionDateTextBlock" FontSize="16" />
-            <TextBox x:Name="ProblemDescTextBox" FontSize="16" TextWrapping="Wrap" AcceptsReturn="True" />
+            <TextBlock x:Name="ProblemDescTextBlock" FontSize="16"/>
+            <Button x:Name="DeleteOrderButton" Click="DeleteOrderButton_Click" Content="Удалить запись" HorizontalAlignment="Center" VerticalAlignment="Center"/>
         </StackPanel>
     </Grid>
 </Window>

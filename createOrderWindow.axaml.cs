@@ -8,11 +8,22 @@ namespace OrdersAcc
     public partial class createOrderWindow : Window
     {
         private string loggedInUser;
+        private string selectedEqType; 
 
         public createOrderWindow(string user)
         {
             loggedInUser = user;
             InitializeComponent();
+        }
+
+        private void EqTypeComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            var comboBox = sender as ComboBox;
+            if (comboBox?.SelectedItem != null)
+            {
+                selectedEqType = (comboBox.SelectedItem as ComboBoxItem).Content.ToString();
+                Console.WriteLine($"Выбранный тип устройства: {selectedEqType}");
+            }
         }
 
         private void SaveOrderButton_Click(object sender, RoutedEventArgs e)
@@ -23,7 +34,12 @@ namespace OrdersAcc
             DateTime completionDate = currentDate.AddDays(2);
             string problemDesc = txtProblemDesc.Text;
             string eqModel = txtEqModel.Text;
-            string eqType = txtEqType.Text;
+
+            if (string.IsNullOrEmpty(selectedEqType))
+            {
+                Console.WriteLine("Ошибка: Тип устройства не выбран.");
+                return;
+            }
 
             int clientId = GetClientIdByUsername(loggedInUser, connectionString);
 
@@ -47,7 +63,7 @@ namespace OrdersAcc
                         command.Parameters.AddWithValue("@Client_ID", clientId);
                         command.Parameters.AddWithValue("@ProblemDesc", problemDesc);
                         command.Parameters.AddWithValue("@EqModel", eqModel);
-                        command.Parameters.AddWithValue("@EqType", eqType);
+                        command.Parameters.AddWithValue("@EqType", selectedEqType);
                         command.Parameters.AddWithValue("@StartDate", currentDate.ToString("yyyy-MM-dd"));
                         command.Parameters.AddWithValue("@Completion_Date", completionDate.ToString("yyyy-MM-dd"));
 
@@ -76,7 +92,7 @@ namespace OrdersAcc
         private int GetClientIdByUsername(string username, string connectionString)
         {
             int clientId = -1;
-            string selectQuery = "SELECT User_ID FROM Users WHERE Login = @Username"; // assuming the username is the login
+            string selectQuery = "SELECT User_ID FROM Users WHERE Login = @Username"; 
 
             try
             {

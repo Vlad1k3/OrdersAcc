@@ -190,3 +190,4 @@
 /home/ssofixd/Documents/OrdersAcc/bin/Debug/net8.0/Markdown.Avalonia.dll
 /home/ssofixd/Documents/OrdersAcc/bin/Debug/net8.0/MsBox.Avalonia.dll
 /home/ssofixd/Documents/OrdersAcc/bin/Debug/net8.0/System.Reactive.dll
+/home/ssofixd/Documents/OrdersAcc/obj/Debug/net8.0/OrdersAcc.sourcelink.json
