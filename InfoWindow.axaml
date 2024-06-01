@@ -1,0 +1,21 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        x:Class="OrdersAcc.InfoWindow"
+        Title="InfoWindow"
+        Width="700"
+        Height="500"
+        CanResize="False">
+    <Grid>
+        <StackPanel Margin="20">
+            <TextBlock x:Name="EqTypeTextBlock" FontSize="16" />
+            <TextBlock x:Name="EqModelTextBlock" FontSize="16" />
+            <TextBlock x:Name="UserNameTextBlock" FontSize="16" />
+            <TextBlock x:Name="StartDateTextBlock" FontSize="16" />
+            <TextBlock x:Name="CompletionDateTextBlock" FontSize="16" />
+            <TextBox x:Name="ProblemDescTextBox" FontSize="16" TextWrapping="Wrap" AcceptsReturn="True" />
+        </StackPanel>
+    </Grid>
+</Window>

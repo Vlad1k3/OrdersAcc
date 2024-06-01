@@ -1,0 +1,31 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:OrdersAcc"
+        mc:Ignorable="d"
+        x:Class="OrdersAcc.MainWindow"
+        Title="Login"
+        Width="400"
+        Height="300"
+        WindowStartupLocation="CenterScreen">
+
+    <Grid Margin="20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!-- Заголовок -->
+        <TextBlock Text="Login" FontSize="24" HorizontalAlignment="Center" Margin="0,0,0,20"/>
+
+        <!-- Форма логина -->
+        <StackPanel Margin="10">
+            <TextBlock Text="Username" FontSize="16" Margin="0,0,0,10"/>
+            <TextBox x:Name="UsernameTextBox" Watermark="Enter your username" Margin="0,0,0,5"/>
+            <TextBlock Text="Password" FontSize="16" Margin="0,0,0,10"/>
+            <TextBox x:Name="PasswordTextBox" Watermark="Enter your password" Margin="0,0,0,5" PasswordChar="*"/>
+            <Button Content="Login" HorizontalAlignment="Center" Margin="0,10,0,0" Click="switchWindowButton"/>
+        </StackPanel>
+    </Grid>
+</Window>

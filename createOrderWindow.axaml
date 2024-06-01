@@ -1,0 +1,22 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d"
+        d:DesignWidth="400"
+        d:DesignHeight="200"
+        x:Class="OrdersAcc.createOrderWindow"
+        Title="Create Order">
+
+    <Grid Margin="20">
+        <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center" Spacing="10">
+            <TextBlock Text="Тип устройства:"/>
+            <TextBox Name="txtEqType" Width="200"/>
+            <TextBlock Text="Модель устройства:"/>
+            <TextBox Name="txtEqModel" Width="200"/>
+            <TextBlock Text="Описание проблемы:"/>
+            <TextBox Name="txtProblemDesc" Width="200"/>
+            <Button Content="Создать заказ" Click="SaveOrderButton_Click" HorizontalAlignment="Center" Width="150"/>
+        </StackPanel>
+    </Grid>
+</Window>
