@@ -17,6 +17,9 @@ build_property.ProjectDir = /home/ssofixd/Documents/OrdersAcc/
 build_property.EnableComHosting = 
 build_property.EnableGeneratedComInterfaceComImportInterop = 
 
+[/home/ssofixd/Documents/OrdersAcc/AnalyzeWindow.axaml]
+build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
+
 [/home/ssofixd/Documents/OrdersAcc/App.axaml]
 build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
 
@@ -30,6 +33,9 @@ build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
 build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
 
 [/home/ssofixd/Documents/OrdersAcc/ordersWindow.axaml]
+build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
+
+[/home/ssofixd/Documents/OrdersAcc/PasswordDialog.axaml]
 build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
 
 [/home/ssofixd/Documents/OrdersAcc/registrationWindow.axaml]

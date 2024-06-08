@@ -20,4 +20,9 @@
     <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="8.0.3" />
     <PackageReference Include="MySql.Data" Version="8.3.0" />
   </ItemGroup>
+  <ItemGroup>
+    <Compile Update="PasswordDialog.axaml.cs">
+      <DependentUpon>PasswordDialog.axaml</DependentUpon>
+    </Compile>
+  </ItemGroup>
 </Project>

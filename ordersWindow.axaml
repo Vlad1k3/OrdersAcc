@@ -9,14 +9,27 @@
         Title="OrdersAcc">
 
     <Grid>
-        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Spacing="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <StackPanel Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,20,0,0" Spacing="10">
+            <TextBox x:Name="orderNumberTextBox" Width="200" Watermark="Введите номер заказа"/>
+            <Button Content="Search order" HorizontalAlignment="Center" Click="searchOrderButton_Click"/>
+        </StackPanel>
+
+        <StackPanel Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" Spacing="10">
             <TextBlock Text="Доступные заказы" FontWeight="Bold"/>
             <ListBox x:Name="orders" SelectionChanged="ListBox_SelectionChanged">
             </ListBox>
         </StackPanel>
-        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Bottom">
-            <Button Content="Update list" Click="updateListButton_Click"/>
-            <Button Content="Create new order" Click="createOrderButton"/>
+
+        <StackPanel x:Name="BottomStackPanel" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Bottom" Spacing="10">
+            <Button Content="Back" HorizontalAlignment="Center" Click="backButton_Click"/>
+            <Button Content="Update list" HorizontalAlignment="Center" Click="updateListButton_Click"/>
+            <Button Content="Create new order" HorizontalAlignment="Center" Click="createOrderButton"/>
         </StackPanel>
     </Grid>
 </Window>

@@ -10,12 +10,13 @@
         CanResize="False">
     <Grid>
         <StackPanel Margin="20" x:Name="MainStackPanel">
-            <TextBlock x:Name="EqTypeTextBlock" FontSize="16" />
-            <TextBlock x:Name="EqModelTextBlock" FontSize="16" />
-            <TextBlock x:Name="UserNameTextBlock" FontSize="16" />
-            <TextBlock x:Name="StartDateTextBlock" FontSize="16" />
-            <TextBlock x:Name="CompletionDateTextBlock" FontSize="16" />
-            <TextBlock x:Name="ProblemDescTextBlock" FontSize="16"/>
+            <TextBox x:Name="EqTypeTextBox" FontSize="16" IsReadOnly="True" />
+            <TextBox x:Name="EqModelTextBox" FontSize="16" IsReadOnly="True" />
+            <TextBox x:Name="StatusTextBox" FontSize="16" IsReadOnly="True" />
+            <TextBox x:Name="UserNameTextBox" FontSize="16" IsReadOnly="True" />
+            <TextBox x:Name="StartDateTextBox" FontSize="16" IsReadOnly="True" />
+            <TextBox x:Name="CompletionDateTextBox" FontSize="16" IsReadOnly="True" />
+            <TextBox x:Name="ProblemDescTextBox" FontSize="16" IsReadOnly="True" />
             <Button x:Name="DeleteOrderButton" Click="DeleteOrderButton_Click" Content="Удалить запись" HorizontalAlignment="Center" VerticalAlignment="Center"/>
         </StackPanel>
     </Grid>

@@ -1,35 +1,80 @@
 using Avalonia.Controls;
 using Avalonia.Interactivity;
+using Avalonia.Markup.Xaml;
 using MySql.Data.MySqlClient;
 using System;
+using MsBox.Avalonia;
+using MsBox.Avalonia.Dto;
+using MsBox.Avalonia.Enums;
+using System.Text.RegularExpressions;
+using Avalonia.Input;
 using System.Threading.Tasks;
 
 namespace OrdersAcc
 {
     public partial class InfoWindow : Window
     {
+        private int Request_ID;
         private string _eqType;
         private string _eqModel;
+        private string userPosition;
 
-        public InfoWindow(string eqType, string eqModel, string problemDesc, string userName, string startDate, string completionDate)
+        public InfoWindow(string eqType, string eqModel, string problemDesc, string userName, string startDate, string completionDate, string status, string position, int request_ID)
         {
             InitializeComponent();
+
+            Request_ID = request_ID;
             _eqType = eqType;
             _eqModel = eqModel;
+            userPosition = position;
 
-            var eqTypeTextBlock = this.FindControl<TextBlock>("EqTypeTextBlock");
-            var eqModelTextBlock = this.FindControl<TextBlock>("EqModelTextBlock");
-            var problemDescTextBlock = this.FindControl<TextBlock>("ProblemDescTextBlock");
-            var userNameTextBlock = this.FindControl<TextBlock>("UserNameTextBlock");
-            var startDateTextBlock = this.FindControl<TextBlock>("StartDateTextBlock");
-            var completionDateTextBlock = this.FindControl<TextBlock>("CompletionDateTextBlock");
 
-            eqTypeTextBlock.Text = $"Тип устройства: {eqType}";
-            eqModelTextBlock.Text = $"Модель устройства: {eqModel}";
-            problemDescTextBlock.Text = $"Описание проблемы: {problemDesc}";
-            userNameTextBlock.Text = $"Пользователь: {userName}";
-            startDateTextBlock.Text = $"Дата начала работ: {startDate}";
-            completionDateTextBlock.Text = $"Дата окончания работ: {completionDate}";
+            var eqTypeTextBox = this.FindControl<TextBox>("EqTypeTextBox");
+            var eqModelTextBox = this.FindControl<TextBox>("EqModelTextBox");
+            var statusTextBox = this.FindControl<TextBox>("StatusTextBox");
+            var problemDescTextBox = this.FindControl<TextBox>("ProblemDescTextBox");
+            var userNameTextBox = this.FindControl<TextBox>("UserNameTextBox");
+            var startDateTextBox = this.FindControl<TextBox>("StartDateTextBox");
+            var completionDateTextBox = this.FindControl<TextBox>("CompletionDateTextBox");
+
+            eqTypeTextBox.Text = eqType;
+            eqModelTextBox.Text = eqModel;
+            statusTextBox.Text = status;
+            problemDescTextBox.Text = problemDesc;
+            userNameTextBox.Text = userName;
+            startDateTextBox.Text = startDate;
+            completionDateTextBox.Text = completionDate;
+       
+
+            if (userPosition != "admin"){
+                eqTypeTextBox.IsReadOnly = true;
+                eqModelTextBox.IsReadOnly = true;
+                statusTextBox.IsReadOnly = true;
+                problemDescTextBox.IsReadOnly = true;
+                userNameTextBox.IsReadOnly = true;
+                startDateTextBox.IsReadOnly = true;
+                completionDateTextBox.IsReadOnly = true;
+            }
+            else{
+                eqTypeTextBox.IsReadOnly = false;
+                eqModelTextBox.IsReadOnly = false;
+                statusTextBox.IsReadOnly = false;
+                problemDescTextBox.IsReadOnly = false;
+                userNameTextBox.IsReadOnly = false;
+                startDateTextBox.IsReadOnly = false;
+                completionDateTextBox.IsReadOnly = false;
+            }
+            if (userPosition == "admin")
+            {
+                Button doneButton= new Button
+                {
+                    Content = "Done",
+                    HorizontalAlignment = Avalonia.Layout.HorizontalAlignment.Center
+                };
+                doneButton.Click += SubmitButton_Click;
+                var stackPanel = this.FindControl<StackPanel>("MainStackPanel");
+                stackPanel.Children.Add(doneButton);
+            }
         }
 
         private async void DeleteOrderButton_Click(object sender, RoutedEventArgs e)
@@ -39,6 +84,47 @@ namespace OrdersAcc
             if (result == MessageBoxResult.Yes)
             {
                 DeleteOrder();
+            }
+        }
+        private async void SubmitButton_Click(object sender, RoutedEventArgs e)
+        {
+
+            string eqType = EqTypeTextBox.Text;
+            string eqModel = EqModelTextBox.Text;
+            string status = StatusTextBox.Text;
+            string UserName = UserNameTextBox.Text;
+            string StartDate = StartDateTextBox.Text;
+            string Completion_Date = CompletionDateTextBox.Text;
+            string ProblemDesc = ProblemDescTextBox.Text;
+
+            var box = MessageBoxManager.GetMessageBoxStandard("Уведомление", "Время добавлено!", MsBox.Avalonia.Enums.ButtonEnum.Ok);
+            var res = await box.ShowWindowDialogAsync(this);
+            string connectionString = "Server=localhost;Port=3306;Database=OrdersApp;Uid=ssofixd;Pwd=290805";
+            string insertQuery = "UPDATE Orders SET ProblemDesc = @ProblemDesc, EqModel = @eqModel, Status = @status, EqType = @eqType, StartDate = @StartDate, Completion_Date = @Completion_Date WHERE Request_ID = @Request_ID";
+            try
+            {
+                using (MySqlConnection connection = new MySqlConnection(connectionString))
+                {
+                    using (MySqlCommand command = new MySqlCommand(insertQuery, connection))
+                    {
+                        command.Parameters.AddWithValue("@ProblemDesc", ProblemDesc);
+                        command.Parameters.AddWithValue("@eqModel", eqModel);
+                        command.Parameters.AddWithValue("@eqType", eqType);
+                        command.Parameters.AddWithValue("@status", status);
+                        command.Parameters.AddWithValue("@StartDate", StartDate);
+                        command.Parameters.AddWithValue("@Completion_Date", Completion_Date );
+                        command.Parameters.AddWithValue("@Request_ID", Request_ID);
+                        connection.Open();
+                        command.ExecuteNonQuery();
+                        if(res == MsBox.Avalonia.Enums.ButtonResult.Ok){
+                            this.Close();
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
             }
         }
 
